@@ -1,0 +1,107 @@
+@import url("./reset.css");
+
+:root {
+  --bg: #fff;
+  --text: #232323;
+  --border: #cdcdcd;
+  --light-text: #bcbcbc;
+  --btn: #f0f0f0;
+  --btn-hover: #c4c4c4;
+}
+
+.dark {
+  --bg: #312d2d;
+  --text: #fff;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.container {
+  width: 1200px;
+  margin: 100px auto;
+}
+
+.btn-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 16px;
+}
+
+.btn {
+  padding: 12px 18px;
+  background: var(--btn);
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+}
+
+.grid {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px;
+}
+
+.card {
+  padding: 16px 24px;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+}
+
+.card-text {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.card-author {
+  width: 100%;
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  padding-top: 16px;
+  color: var(--light-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hide {
+  display: none;
+}
+
+.modal {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.show {
+  display: flex;
+}
+
+.modal-container {
+  width: 640px;
+  padding: 24px 36px;
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 32px;
+}
+
+.modal-text {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+  margin-bottom: 24px;
+}

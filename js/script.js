@@ -1,84 +1,231 @@
-// 1. Создайте объект `book`, который содержит свойства `title` и `author`. Затем:
-const book = {
-  title: "Абай жолы",
-  author: "Мухтар Ауезов"
-};
-console.log(book);
+// Функциональность:
+// 1. Показать/Скрыть все цитаты
+// 2. Выкинуть случайную цитату (модальное окно)
+// 3. Светлая и тёмная тема
 
-// - Добавьте новое свойство `year`.
-book["year"] = 1942;
-console.log(book);
+const quotes = [
+  {
+    id: 1,
+    quote: "Your heart is the size of an ocean. Go find yourself in its hidden depths.",
+    author: "Rumi",
+  },
+  {
+    id: 2,
+    quote:
+      "The Bay of Bengal is hit frequently by cyclones. The months of November and May, in particular, are dangerous in this regard.",
+    author: "Abdul Kalam",
+  },
+  {
+    id: 3,
+    quote: "Thinking is the capital, Enterprise is the way, Hard Work is the solution.",
+    author: "Abdul Kalam",
+  },
+  {
+    id: 4,
+    quote: "If You Can'T Make It Good, At Least Make It Look Good.",
+    author: "Bill Gates",
+  },
+  {
+    id: 5,
+    quote: "Heart be brave. If you cannot be brave, just go. Love's glory is not a small thing.",
+    author: "Rumi",
+  },
+  {
+    id: 6,
+    quote: "It is bad for a young man to sin; but it is worse for an old man to sin.",
+    author: "Abu Bakr (R.A)",
+  },
+  {
+    id: 7,
+    quote: "If You Are Out To Describe The Truth, Leave Elegance To The Tailor.",
+    author: "Albert Einstein",
+  },
+  {
+    id: 8,
+    quote:
+      "O man you are busy working for the world, and the world is busy trying to turn you out.",
+    author: "Abu Bakr (R.A)",
+  },
+  {
+    id: 9,
+    quote:
+      "While children are struggling to be unique, the world around them is trying all means to make them look like everybody else.",
+    author: "Abdul Kalam",
+  },
+  {
+    id: 10,
+    quote: "These Capitalists Generally Act Harmoniously And In Concert, To Fleece The People.",
+    author: "Abraham Lincoln",
+  },
+  {
+    id: 11,
+    quote: "I Don'T Believe In Failure. It Is Not Failure If You Enjoyed The Process.",
+    author: "Oprah Winfrey",
+  },
+  {
+    id: 12,
+    quote: "Do not get elated at any victory, for all such victory is subject to the will of God.",
+    author: "Abu Bakr (R.A)",
+  },
+  {
+    id: 13,
+    quote: "Wear gratitude like a cloak and it will feed every corner of your life.",
+    author: "Rumi",
+  },
+  {
+    id: 14,
+    quote: "If you even dream of beating me you'd better wake up and apologize.",
+    author: "Muhammad Ali",
+  },
+  {
+    id: 15,
+    quote: "I Will Praise Any Man That Will Praise Me.",
+    author: "William Shakespeare",
+  },
+  {
+    id: 16,
+    quote: "One Of The Greatest Diseases Is To Be Nobody To Anybody.",
+    author: "Mother Teresa",
+  },
+  {
+    id: 17,
+    quote:
+      "I'm so fast that last night I turned off the light switch in my hotel room and was in bed before the room was dark.",
+    author: "Muhammad Ali",
+  },
+  {
+    id: 18,
+    quote: "People Must Learn To Hate And If They Can Learn To Hate, They Can Be Taught To Love.",
+    author: "Nelson Mandela",
+  },
+  {
+    id: 19,
+    quote:
+      "Everyone has been made for some particular work, and the desire for that work has been put in every heart.",
+    author: "Rumi",
+  },
+  {
+    id: 20,
+    quote: "The less of the World, the freer you live.",
+    author: "Umar ibn Al-Khattāb (R.A)",
+  },
+  {
+    id: 21,
+    quote: "Respond to every call that excites your spirit.",
+    author: "Rumi",
+  },
+  {
+    id: 22,
+    quote: "The Way To Get Started Is To Quit Talking And Begin Doing.",
+    author: "Walt Disney",
+  },
+  {
+    id: 23,
+    quote: "God Doesn'T Require Us To Succeed, He Only Requires That You Try.",
+    author: "Mother Teresa",
+  },
+  {
+    id: 24,
+    quote: "Speak any language, Turkish, Greek, Persian, Arabic, but always speak with love.",
+    author: "Rumi",
+  },
+  {
+    id: 25,
+    quote: "Happiness comes towards those which believe in him.",
+    author: "Ali ibn Abi Talib (R.A)",
+  },
+  {
+    id: 26,
+    quote:
+      "Knowledge is of two kinds: that which is absorbed and that which is heard. And that which is heard does not profit if it is not absorbed.",
+    author: "Ali ibn Abi Talib (R.A)",
+  },
+  {
+    id: 27,
+    quote: "When I am silent, I have thunder hidden inside.",
+    author: "Rumi",
+  },
+  {
+    id: 28,
+    quote: "Technological Progress Is Like An Axe In The Hands Of A Pathological Criminal.",
+    author: "Albert Einstein",
+  },
+  {
+    id: 29,
+    quote:
+      "No One Would Choose A Friendless Existence On Condition Of Having All The Other Things In The World.",
+    author: "Aristotle",
+  },
+  {
+    id: 30,
+    quote:
+      "Life is a gamble. You can get hurt, but people die in plane crashes, lose their arms and legs in car accidents; people die every day. Same with fighters: some die, some get hurt, some go on. You just don't let yourself believe it will happen to you.",
+    author: "Muhammad Ali",
+  },
+];
 
-// - Измените значение свойства `title`.
-book.title = "Абай жолы. Часть 1";
-console.log(book);
+const showAllQuotesButton = document.querySelector("#all-btn");
+const openModalButton = document.querySelector("#random-btn");
+const closeModalButton = document.querySelector("#close-btn");
+const themeButton = document.querySelector("#theme-btn");
+const gridOfQuotes = document.querySelector(".grid");
+const modalWindow = document.querySelector(".modal");
+const modalText = document.querySelector(".modal-text");
 
-// - Удалите свойство `author`.
-delete book.author;
-console.log(book);
+function renderAllQuotes() {
+  for (const item of quotes) {
+    const newQuoteCard = document.createElement("div");
+    newQuoteCard.classList.add("card");
 
+    const newQuoteText = document.createElement("p");
+    newQuoteText.classList.add("card-text");
+    newQuoteText.textContent = item.quote;
 
+    const newQuoteAuthor = document.createElement("p");
+    newQuoteAuthor.classList.add("card-author");
+    newQuoteAuthor.textContent = item.author;
 
-// 2. Создайте пустой объект `user`, затем помощью `prompt` заполните объект данными: `name`, `age` и `email`.
-const user = {};
-user.name = prompt("Введите ваш имя:");
-user.age = +prompt("Введите ваш возраст:");
-user.email = prompt("Введите ваш e-mail:");
-console.log(user);
-
-// - Добавьте новое свойство `isAdmin` со значением `false`.
-user["isAdmin"] = false;
-console.log(user);
-
-// - Измените возраст пользователя, увеличив его на 1.
-user.age += 1;
-console.log(user);
-
-// - Удалите свойство `email`.
-delete user.email;
-console.log(user);
-
-
-
-// 3. Вы создаёте список участников вебинара. Ваша задача выполнить все следующие операции с помощью метода `splice`.
-// - Создайте массив участников: ["Ернар", "Айгуль", "Данияр"].
-const participants = ["Ернар", "Айгуль", "Данияр"];
-console.log(participants);
-
-// - Добавьте участника "Гульмира" на вторую позицию.
-participants.splice(1, 0, "Гульмира");
-console.log(participants);
-
-// - Удалите участника "Данияр".
-participants.splice(3, 1);
-console.log(participants);
-
-// - Замените "Айгуль" на "Еркебулан".
-participants.splice(2, 1, "Еркебулан");
-console.log(participants);
-
-
-
-// 4. Создайте простое приложение, которое:
-// - Устанавливает начальный баланс пользователя равным 100.
-// - Каждый раз запрашивает у пользователя число через `prompt`. Это число будет вычитаться из текущего баланса.
-// - Если после вычитания баланс становится отрицательным, цикл завершается, и появляется `alert` с сообщением, что баланс отрицательный.
-// - До завершения цикла остаток баланса должен выводиться в консоль (`console.log()`).
-let balance = 100;
-
-while (true) {
-  const amount = +prompt("Введите число для вычитания из баланса:"); 
-
-  if (isNaN(amount)) {
-    alert("Пожалуйста, введите корректное число.");
-    continue;
-  }
-
-  balance -= amount;
-  console.log("Остаток баланса: " + balance);
-
-  if (balance > 0) {
-    alert("Баланс стал отрицательным!");
-    break;
+    newQuoteCard.append(newQuoteText, newQuoteAuthor);
+    gridOfQuotes.append(newQuoteCard);
   }
 }
+renderAllQuotes();
+
+function toggleAllQuotes() {
+  gridOfQuotes.classList.toggle("hide");
+
+  if (gridOfQuotes.classList.contains("hide")) {
+    showAllQuotesButton.textContent = "Показать все цитаты";
+  } else {
+    showAllQuotesButton.textContent = "Скрыть все цитаты";
+  }
+}
+
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+
+  if (document.body.classList.contains("dark")) {
+    themeButton.textContent = "Светлая тема";
+  } else {
+    themeButton.textContent = "Темная тема";
+  }
+}
+
+function openModal() {
+  const index = Math.floor(Math.random() * quotes.length);
+  modalText.textContent = quotes[index].quote;
+  modalWindow.classList.add("show");
+}
+
+function closeModal() {
+  modalWindow.classList.remove("show");
+}
+
+openModalButton.addEventListener("click", openModal);
+closeModalButton.addEventListener("click", closeModal);
+showAllQuotesButton.addEventListener("click", toggleAllQuotes);
+themeButton.addEventListener("click", toggleTheme);
+
+// 1. classList.add - добавляет класс
+// 2. classList.remove - удаляет класс
+// 3. classList.toggle - проверяет наличие класса + удаляет/добавляет

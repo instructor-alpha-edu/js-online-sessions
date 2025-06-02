@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Online Session [16.05.2025]</h1>
-  <script src="./js/script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="btn-list">
+        <button class="btn" id="all-btn">Показать все цитаты</button>
+        <button class="btn" id="random-btn">Показать случайную цитату</button>
+        <button class="btn" id="theme-btn">Темная тема</button>
+      </div>
+      <div class="grid hide"></div>
+    </div>
+    <div class="modal">
+      <div class="modal-container">
+        <p class="modal-text"></p>
+        <button id="close-btn" class="btn">Закрыть</button>
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
 </html>
